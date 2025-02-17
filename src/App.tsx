@@ -7,9 +7,6 @@ function App() {
 
   const [ numbers, setNumbers ] = useState<number[]>(generateNumbers());
 
-  useEffect(() => {
-    console.log(numbers);
-  }, [])
 
   return (
     <>

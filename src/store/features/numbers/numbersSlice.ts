@@ -14,19 +14,19 @@ const numbersSice = createSlice({
     name: "numbers",
     initialState,
     reducers: {
-        setFirstNumber: (state, action: PayloadAction<number>) =>{
-            state.firstNumber = action.payload
-        },
-        setSecondNummber: (state, action: PayloadAction<number>) => {
-            state.secondNumber = action.payload
-        },
-        resetAll: (state) => {
-            state.firstNumber = null,
-            state.secondNumber = null
+        updateValues: (state, action: PayloadAction<number>) => {
+            if (state.firstNumber === null && state.secondNumber === null) {
+                state.firstNumber = action.payload;
+            } else if (typeof state.firstNumber === "number" && state.secondNumber === null ) {
+                state.secondNumber = action.payload;
+            } else {
+                state.firstNumber = action.payload,
+                state.secondNumber = null
+            }
         }
     }
 })
 
-export const { setFirstNumber, setSecondNummber, resetAll } = numbersSice.actions;
+export const { updateValues } = numbersSice.actions;
 
 export default numbersSice.reducer;

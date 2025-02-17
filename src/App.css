@@ -11,8 +11,6 @@
 }
 
 .card {
-  background-color: cornflowerblue;
-  color: cornflowerblue;
   width: 100px;
   height: 130px;
   text-align: center;
@@ -20,21 +18,33 @@
   font-weight: 600;
   cursor: pointer;
   border-radius: 2px;
-  transition: 
-    transform 0.8s ease-in,
-    background-color 0.8s ease-in,
-    color 1s;
 }
 
-.card:hover {
-  transform: rotateY(180deg);
+.card-not-rotated {
+  background-color: cornflowerblue;
+  transition: transform 0.7s ease-in, background-color 0.7s ease-in;
+}
+
+.card-rotated {
   background-color: beige;
+  transform: rotateY(180deg);
+  transition: 
+    transform 0.7s ease-in,
+    background-color 0.7s ease-in,
+    color 0.7s ease-in;
 }
 
-.content {
-  transition: transform 0.8s ease-in;
+.value {
+  color: cornflowerblue;
 }
 
-.card:hover .content {
-  transform: rotateY(-180deg);
+.value-not-rotated {
+  transition: transform 0.7s ease-in,
+  color 0.7s ease-in;
+}
+
+.value-rotated {
+  transform: rotateY(180deg);
+  color: cornflowerblue;
+  transition: color 0.7s ease-in;
 }

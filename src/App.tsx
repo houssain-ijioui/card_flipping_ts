@@ -10,12 +10,29 @@ import { updateValues } from './store/features/numbers/numbersSlice';
 function App() {
   
   const [ numbers, setNumbers ] = useState<number[]>(generateNumbers());
+  const [ rotates, setRotates ] = useState<boolean[]>(new Array(numbers.length).fill(false));
   
   const dispatch = useDispatch();
+  const firstNumber = useSelector((state: RootState) => state.numbers.firstNumber);
+  const secondNumber = useSelector((state: RootState) => state.numbers.secondNumber);
 
-  const handleClick = (value: number) => {
+  const handleClick = (value: number, index: number) => {
     dispatch(updateValues(value))
+
+    setRotates(prevRotates => 
+      prevRotates.map((rotate, i) => (i === index ? !rotate : rotate))
+    )
   }
+
+  useEffect(() => {
+    if (typeof secondNumber === "number") {
+      if (firstNumber === secondNumber) {
+        console.log("success");
+      } else {
+        console.log("try again");
+      }
+    }
+  }, [secondNumber])
   
 
   return (
@@ -23,7 +40,7 @@ function App() {
       <section className='cards'>
         {numbers.map((n, index) => {
           return (
-            <Card key={index} value={n} handleClick={handleClick} />
+            <Card key={index} value={n} handleClick={() => handleClick(n, index)} rotate={rotates[index]} />
           )
         })}
       </section>

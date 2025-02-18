@@ -4,7 +4,19 @@
   padding: 2rem;
 }
 
+#game {
+  display: flex;
+  flex-direction: column;
+}
+
+#score {
+  position: relative;
+  top: -50px;
+}
+
 .cards {
+  position: relative;
+  top: -50px;
   display: grid;
   grid-template-columns: repeat(10, 100px);
   gap: 10px;

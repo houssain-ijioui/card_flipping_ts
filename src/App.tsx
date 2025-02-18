@@ -34,7 +34,9 @@ function App() {
   useEffect(() => {
     if (typeof secondNumberIndex === "number" && typeof firstNumberIndex === "number") {
       if (numbers[firstNumberIndex] === numbers[secondNumberIndex]) {
-        setScore(prev => prev + 1)
+        setTimeout(() => {
+          setScore(prev => prev + 1)
+        }, 800);
         setSolvedCards([...solvedCards, secondNumberIndex, firstNumberIndex])
       } else {
         setAllowedToPlay(false)
@@ -54,13 +56,16 @@ function App() {
 
   return (
     <>
-      <section className='cards'>
-        {numbers.map((n, index) => {
-          return (
-            <Card key={index} value={n} handleClick={() => handleClick(n, index)} rotate={rotates[index]} />
-          )
-        })}
-      </section>
+      <div id='game'>
+        <h1 id='score'>Score: {score}</h1>
+        <section className='cards'>
+          {numbers.map((n, index) => {
+            return (
+              <Card key={index} value={n} handleClick={() => handleClick(n, index)} rotate={rotates[index]} />
+            )
+          })}
+        </section>
+      </div>
     </>
   )
 }

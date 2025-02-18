@@ -15,7 +15,7 @@ function App() {
   const [solvedCards, setSolvedCards] = useState<number[]>([]);
   const [score, setScore] = useState<number>(0);
   const [allowedToPlay, setAllowedToPlay] = useState<boolean>(true);
-  const [time, setTime] = useState<number>(10);
+  const [time, setTime] = useState<number>(120);
 
   const dispatch = useDispatch();
   const firstNumberIndex = useSelector((state: RootState) => state.numbers.firstNumberIndex);
@@ -58,8 +58,16 @@ function App() {
       setTimeout(() => {
         setTime(prev => prev - 1)
       }, 1000);
+    } else {
+      resetGame(setScore, setRotates, numbers.length, setTime)
     }
   }, [time])
+
+  useEffect(() => {
+    if (score === 20) {
+      resetGame(setScore, setRotates, numbers.length, setTime)
+    }
+  }, [score])
 
 
   return (

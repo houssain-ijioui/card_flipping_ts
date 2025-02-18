@@ -9,7 +9,8 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({ value, handleClick, rotate }) => {
 
     return (
-        <article className={`card ${rotate ? "card-rotated": "card-not-rotated"} `} onClick={() => handleClick(value)} >
+        <article className={`card ${rotate ? "card-rotated": "card-not-rotated"} `} onClick={
+            () => handleClick(value)} >
             <p className={`value ${rotate ? "value-rotated": "value-not-rotated"}`}>{value}</p>
         </article>
     )

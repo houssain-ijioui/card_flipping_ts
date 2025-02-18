@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface NumbersState {
-    firstNumber: number | null;
-    secondNumber: number | null
+    firstNumberIndex: number | null;
+    secondNumberIndex: number | null
 }
 
 const initialState: NumbersState = {
-    firstNumber: null,
-    secondNumber: null  
+    firstNumberIndex: null,
+    secondNumberIndex: null  
 }
 
 const numbersSice = createSlice({
@@ -15,13 +15,13 @@ const numbersSice = createSlice({
     initialState,
     reducers: {
         updateValues: (state, action: PayloadAction<number>) => {
-            if (state.firstNumber === null && state.secondNumber === null) {
-                state.firstNumber = action.payload;
-            } else if (typeof state.firstNumber === "number" && state.secondNumber === null ) {
-                state.secondNumber = action.payload;
+            if (state.firstNumberIndex === null && state.secondNumberIndex === null) {
+                state.firstNumberIndex = action.payload;
+            } else if (typeof state.firstNumberIndex === "number" && state.secondNumberIndex === null ) {
+                state.secondNumberIndex = action.payload;
             } else {
-                state.firstNumber = action.payload,
-                state.secondNumber = null
+                state.firstNumberIndex = action.payload,
+                state.secondNumberIndex = null
             }
         }
     }

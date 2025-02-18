@@ -9,9 +9,13 @@
   flex-direction: column;
 }
 
-#score {
+
+#top-bar {
   position: relative;
   top: -50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .cards {

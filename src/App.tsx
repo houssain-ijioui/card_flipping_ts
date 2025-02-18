@@ -5,6 +5,7 @@ import { generateNumbers } from './utils/numbers';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import { updateValues } from './store/features/numbers/numbersSlice';
+import { resetGame } from './utils/resetGame';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [solvedCards, setSolvedCards] = useState<number[]>([]);
   const [score, setScore] = useState<number>(0);
   const [allowedToPlay, setAllowedToPlay] = useState<boolean>(true);
+  const [time, setTime] = useState<number>(10);
 
   const dispatch = useDispatch();
   const firstNumberIndex = useSelector((state: RootState) => state.numbers.firstNumberIndex);
@@ -51,13 +53,22 @@ function App() {
     }
   }, [secondNumberIndex])
 
-
+  useEffect(() => {
+    if (time > 0) {
+      setTimeout(() => {
+        setTime(prev => prev - 1)
+      }, 1000);
+    }
+  }, [time])
 
 
   return (
     <>
       <div id='game'>
-        <h1 id='score'>Score: {score}</h1>
+        <div id='top-bar'>
+          <h1 id='score'>Score: {score}</h1>
+          <h1 id='time'>Time Left: {time}s</h1>
+        </div>
         <section className='cards'>
           {numbers.map((n, index) => {
             return (

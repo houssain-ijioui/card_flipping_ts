@@ -57,6 +57,7 @@
 .value-not-rotated {
   transition: transform 0.7s ease-in,
   color 0.7s ease-in;
+  display: none;
 }
 
 .value-rotated {

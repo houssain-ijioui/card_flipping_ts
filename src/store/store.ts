@@ -5,6 +5,9 @@ import numbersReducer from './features/numbers/numbersSlice';
 const store = configureStore({
     reducer: {
         numbers: numbersReducer,
+    },
+    devTools: {
+        
     }
 })
 

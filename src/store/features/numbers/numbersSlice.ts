@@ -23,10 +23,14 @@ const numbersSice = createSlice({
                 state.firstNumberIndex = action.payload,
                 state.secondNumberIndex = null
             }
+        },
+        resetAll: (state) => {
+            state.firstNumberIndex = null,
+            state.secondNumberIndex = null
         }
     }
 })
 
-export const { updateValues } = numbersSice.actions;
+export const { updateValues, resetAll } = numbersSice.actions;
 
 export default numbersSice.reducer;

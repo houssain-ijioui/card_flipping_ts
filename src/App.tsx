@@ -4,7 +4,7 @@ import Card from './components/Card';
 import { generateNumbers } from './utils/numbers';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
-import { updateValues } from './store/features/numbers/numbersSlice';
+import { updateValues, resetAll } from './store/features/numbers/numbersSlice';
 import { resetGame } from './utils/resetGame';
 
 
@@ -22,9 +22,17 @@ function App() {
   const secondNumberIndex = useSelector((state: RootState) => state.numbers.secondNumberIndex);
 
   const handleClick = (value: number, index: number) => {
+
+    // if card clicked twice resetAll
+    if (index === firstNumberIndex) {
+      dispatch(resetAll())
+    }
+
     if (!solvedCards.includes(index)) {
       if (allowedToPlay) {
-        dispatch(updateValues(index))
+        if (index !== firstNumberIndex) {
+          dispatch(updateValues(index))
+        }
 
         setRotates(prevRotates =>
           prevRotates.map((rotate, i) => (i === index ? !rotate : rotate))
@@ -35,7 +43,8 @@ function App() {
 
   useEffect(() => {
     if (typeof secondNumberIndex === "number" && typeof firstNumberIndex === "number") {
-      if (numbers[firstNumberIndex] === numbers[secondNumberIndex]) {
+      // check if numbers equal each other
+      if (numbers[firstNumberIndex] === numbers[secondNumberIndex] && firstNumberIndex !== secondNumberIndex) {
         setTimeout(() => {
           setScore(prev => prev + 1)
         }, 800);
@@ -47,21 +56,24 @@ function App() {
           setRotates(
             rotates.map((rotate, i) => (solvedCards.includes(i) ? true : false))
           )
-          setAllowedToPlay(true)
         }, 1000);
+        setTimeout(() => {
+          setAllowedToPlay(true)
+        }, 2000);
       }
+      dispatch(resetAll())
     }
   }, [secondNumberIndex])
 
-  useEffect(() => {
-    if (time > 0) {
-      setTimeout(() => {
-        setTime(prev => prev - 1)
-      }, 1000);
-    } else {
-      resetGame(setScore, setRotates, numbers.length, setTime)
-    }
-  }, [time])
+  // useEffect(() => {
+  //   if (time > 0) {
+  //     setTimeout(() => {
+  //       setTime(prev => prev - 1)
+  //     }, 1000);
+  //   } else {
+  //     resetGame(setScore, setRotates, numbers.length, setTime)
+  //   }
+  // }, [time])
 
   useEffect(() => {
     if (score === 20) {

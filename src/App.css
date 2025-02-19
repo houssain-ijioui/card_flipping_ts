@@ -66,3 +66,11 @@
   color: cornflowerblue;
   transition: color 0.7s ease-in;
 }
+
+.time-colored {
+  color: rgb(219, 78, 78);
+}
+
+.score-colored {
+  color: rgb(27, 176, 126);
+}

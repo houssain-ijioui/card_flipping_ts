@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import { updateValues, resetAll } from './store/features/numbers/numbersSlice';
 import { resetGame } from './utils/resetGame';
+import { setTimeColor, setScoreColor } from './store/features/animation/animationSlice';
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
   const dispatch = useDispatch();
   const firstNumberIndex = useSelector((state: RootState) => state.numbers.firstNumberIndex);
   const secondNumberIndex = useSelector((state: RootState) => state.numbers.secondNumberIndex);
+  const timeColored = useSelector((state: RootState) => state.animation.timeColored);
+  const scoreColored = useSelector((state: RootState) => state.animation.scoreColored)
 
   const handleClick = (value: number, index: number) => {
 
@@ -65,17 +68,32 @@ function App() {
     }
   }, [secondNumberIndex])
 
-  // useEffect(() => {
-  //   if (time > 0) {
-  //     setTimeout(() => {
-  //       setTime(prev => prev - 1)
-  //     }, 1000);
-  //   } else {
-  //     resetGame(setScore, setRotates, numbers.length, setTime)
-  //   }
-  // }, [time])
+  useEffect(() => {
+    // changE color of time that is shown
+    if (time < 20) {
+      dispatch(setTimeColor())
+    }
+
+    // decrease time and if time runs out reset all 
+    if (time > 0) {
+      setTimeout(() => {
+        setTime(prev => prev - 1)
+      }, 1000);
+    } else {
+      resetGame(setScore, setRotates, numbers.length, setTime)
+    }
+  }, [time])
 
   useEffect(() => {
+    // change color of the score if it rises and rechange it again
+    if (score !== 20 && score !== 0) {
+      dispatch(setScoreColor())
+      setTimeout(() => {
+        dispatch(setScoreColor())
+      }, 500);
+    }
+
+    // reset game if maximum score is attained
     if (score === 20) {
       resetGame(setScore, setRotates, numbers.length, setTime)
     }
@@ -86,8 +104,8 @@ function App() {
     <>
       <div id='game'>
         <div id='top-bar'>
-          <h1 id='score'>Score: {score}</h1>
-          <h1 id='time'>Time Left: {time}s</h1>
+          <h1 id='score' className={`${scoreColored ? "score-colored": ""}`}>Score: {score}</h1>
+          <h1 id='time' className={`${timeColored ? "time-colored": ""}`}>Time Left: {time}s</h1>
         </div>
         <section className='cards'>
           {numbers.map((n, index) => {

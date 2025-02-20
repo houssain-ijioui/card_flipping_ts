@@ -17,6 +17,7 @@ function App() {
   const [score, setScore] = useState<number>(0);
   const [allowedToPlay, setAllowedToPlay] = useState<boolean>(true);
   const [time, setTime] = useState<number>(120);
+  const [ moves, setMoves ] = useState<number>(0);
 
   const dispatch = useDispatch();
   const firstNumberIndex = useSelector((state: RootState) => state.numbers.firstNumberIndex);
@@ -65,11 +66,14 @@ function App() {
         }, 2000);
       }
       dispatch(resetAll())
+      setTimeout(() => {
+        setMoves(moves + 1);
+      }, 500);
     }
   }, [secondNumberIndex])
 
   useEffect(() => {
-    // changE color of time that is shown
+    // change color of time that is shown
     if (time < 20) {
       dispatch(setTimeColor())
     }
@@ -104,8 +108,9 @@ function App() {
     <>
       <div id='game'>
         <div id='top-bar'>
-          <h1 id='score' className={`${scoreColored ? "score-colored": ""}`}>Score: {score}</h1>
-          <h1 id='time' className={`${timeColored ? "time-colored": ""}`}>Time Left: {time}s</h1>
+          <h1 id='score' className={`${scoreColored ? "score-colored": ""}`}>Score: <br />{score}</h1>
+          <h1 id='time' className={`${timeColored ? "time-colored": ""}`}>Time Left: <br />{time}s</h1>
+          <h1>Moves: <br />{moves}</h1>
         </div>
         <section className='cards'>
           {numbers.map((n, index) => {

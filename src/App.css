@@ -9,13 +9,15 @@
 
 #game {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding: 18px;
+  gap: 14px;
 }
 
 #top-bar {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-evenly;
   font-size: 13px;  
 }
 

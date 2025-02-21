@@ -106,11 +106,11 @@ function Game() {
 
   return (
     <>
-      <div id='game' className=''>
+      <div id='game' className='bg-sky-50'>
         <div id='top-bar'>
-          <h1 id='score' className={`${scoreColored ? "score-colored": ""}`}>Score: <br />{score}</h1>
-          <h1 id='time' className={`${timeColored ? "time-colored": ""}`}>Time Left: <br />{time}s</h1>
-          <h1>Moves: <br />{moves}</h1>
+          <h1 id='score' className={`${scoreColored ? "score-colored": ""} font-bold text-larger`}>Score: <br />{score}</h1>
+          <h1 id='time' className={`${timeColored ? "time-colored": ""} font-bold text-larger`}>Time Left: <br />{time}s</h1>
+          <h1 className='font-bold text-larger'>Moves: <br />{moves}</h1>
         </div>
         <section className='cards'>
           {numbers.map((n, index) => {

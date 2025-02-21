@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import "../App.css"
+import "./game.css"
 import Card from '../components/Card';
 import { generateNumbers } from '../utils/numbers';
 import { useDispatch, useSelector } from 'react-redux';
@@ -106,7 +106,7 @@ function Game() {
 
   return (
     <>
-      <div id='game'>
+      <div id='game' className=''>
         <div id='top-bar'>
           <h1 id='score' className={`${scoreColored ? "score-colored": ""}`}>Score: <br />{score}</h1>
           <h1 id='time' className={`${timeColored ? "time-colored": ""}`}>Time Left: <br />{time}s</h1>

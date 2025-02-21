@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom'
 function App() {
   return (
     <>
-        <h1>main</h1>
+        <h1 className='text-3xl'>main</h1>
     </>
   )
 }
